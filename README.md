@@ -1,49 +1,79 @@
-1. DevFeedback & Roadmap Board (SaaS)
+# 🚀 DevFeedback & Roadmap Board
 
-    Complexity: Intermediate
+> A modern, full-stack micro-SaaS platform where product teams create public feedback boards for users to submit feature requests, vote on ideas, track progress via a Kanban roadmap, and participate in discussions.
 
-    Concept: A micro-SaaS platform where product teams create public feedback boards for users to submit feature requests and vote on roadmaps.
+![Next.js](https://img.shields.io/badge/Next.js-16.4-black?style=flat-square&logo=next.js)
+![React](https://img.shields.io/badge/React-19-blue?style=flat-square&logo=react)
+![TypeScript](https://img.shields.io/badge/TypeScript-6.0-blue?style=flat-square&logo=typescript)
+![Prisma](https://img.shields.io/badge/Prisma-7.10-2D3748?style=flat-square&logo=prisma)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4.3-38B2AC?style=flat-square&logo=tailwind-css)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-Database-336791?style=flat-square&logo=postgresql)
 
-How the Tech Stack Is Used:
+---
 
-    Auth.js: User login via GitHub or Google for feature submitters, plus role-based access for board admins.
+## ✨ Key Features
 
-    PostgreSQL & Prisma: Relational models for Users, Boards, Posts, Upvotes, and Comments. Prisma relations handle Upvote uniqueness (userId + postId).
+- **🔐 GitHub OAuth Authentication:** Secure sign-in and sign-out integration via Auth.js (NextAuth v5) and Prisma adapter.
+- **💡 Submitting New Ideas:** Intuitive form to submit suggestions with title, rich description, and category classification (*Feature*, *Bug*, *Improvement*).
+- **📋 Feedback Board & Feed:** Responsive card feed displaying suggestions with category badges, author profiles, and real-time vote/comment counters.
+- **🔍 Filtering & Sorting:** Instant category filtering and sorting by *Newest* or *Top Voted*.
+- **⭐ Upvoting System:** One-vote-per-user system with optimistic UI updates and robust uniqueness enforcement.
+- **🗺️ Public Roadmap Kanban Board:** Interactive multi-column board categorizing product items across *Planned*, *In-Progress*, and *Live*.
+- **💬 Comments & Discussions:** Threaded comment system on individual feedback pages (`/feedback/[id]`) for community feedback and team updates.
 
-    Next.js Server Actions: Handle fast upvoting and instant comment submissions with optimistic UI updates.
+---
 
-    Tailwind CSS: Responsive Kanban layout (Planned, In Progress, Completed columns).
+## 🛠️ Tech Stack
 
----------------------
-GitHub OAuth Login/Logout: Users can click a button, be redirected to GitHub to grant permissions, and then return to the main page already logged in—with their name and profile picture displayed. (Completed)
+- **Framework:** Next.js (App Router, Server Actions, Turbopack)
+- **UI Library:** React 19
+- **Language:** TypeScript
+- **Database & ORM:** PostgreSQL & Prisma ORM (`@prisma/client`, `@prisma/adapter-pg`)
+- **Authentication:** Auth.js v5 (`next-auth`) with GitHub provider
+- **Styling:** Tailwind CSS v4
 
+---
 
-1. Submitting New Ideas or Suggestions (Create Feedback) (In Progress)
+## 🚀 Getting Started Locally
 
-Concept: A simple form that allows users to enter a title and a detailed description for their suggestion, and select a category (e.g., "Feature," "Bug," or "Improvement"). 
+### Prerequisites
+- Node.js (v18+)
+- PostgreSQL database instance
 
-Value: Gives users a voice to easily share their needs.
+### 1. Clone the repository
+```bash
+git clone https://github.com/mahmoudsalahjob/devfeedback.git
+cd devfeedback
+```
 
-2. Viewing the List of Suggestions (Feedback Board / Feed)
+### 2. Install dependencies
+```bash
+npm install
+```
 
-Concept: A main page that displays all ideas submitted by other users in the form of "cards." 
+### 3. Configure Environment Variables
+Create a `.env` file in the root directory:
+```env
+DATABASE_URL="postgresql://user:password@localhost:5432/devfeedback?schema=public"
+AUTH_SECRET="your-auth-secret-key-here"
+AUTH_GITHUB_ID="your-github-client-id"
+AUTH_GITHUB_SECRET="your-github-client-secret"
+```
 
-Filtering and Sorting: Options to sort ideas by "Most Upvoted" or "Newest," or to filter them by category (e.g., viewing only "Bugs").
+### 4. Push Prisma Schema to Database
+```bash
+npx prisma db push
+```
 
-3. Upvoting System
+### 5. Run the Development Server
+```bash
+npm run dev
+```
 
-Concept: Each idea card includes an upvote button (a "+1" indicator). 
+Open [http://localhost:3000](http://localhost:3000) in your browser to view the application.
 
-Controls: Users can click the button once to support an idea (they cannot vote more than once for the same idea).
+---
 
-4. Public Roadmap View
+## 📜 License
 
-Concept: A separate tab or page, designed as a Kanban board, that displays the status of ideas across three columns:
-
-Planned: Ideas approved by the company that are scheduled for development. 
-
-In-Progress: Features currently under development. 
-
-Live / Completed: Features that have been completed and released to the public. 5. Comments and Discussions
-
-Concept: The ability to open any idea and comment on it, facilitating discussion among users or allowing the team to provide responses.
+This project is open-source and available under the [MIT License](LICENSE).
